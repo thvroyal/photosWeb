@@ -1,4 +1,4 @@
-import {preloadImages, preloadFonts} from '../utils';
+import {preloadFonts, preloadImages} from '../utils';
 import Cursor from '../cursor';
 import LocomotiveScroll from 'locomotive-scroll';
 
@@ -8,6 +8,7 @@ const lscroll = new LocomotiveScroll({
     smooth: true,
     direction: 'horizontal'
 });
+
 
 // Preload images and fonts
 Promise.all([preloadImages('.gallery__item-imginner'), preloadFonts('vxy2fer')]).then(() => {
@@ -23,3 +24,6 @@ Promise.all([preloadImages('.gallery__item-imginner'), preloadFonts('vxy2fer')])
         link.addEventListener('mouseleave', () => cursor.leave());
     });
 });
+
+
+
