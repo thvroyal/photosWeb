@@ -20,7 +20,7 @@
 </head>
 <body class="demo-1 loading">
 <div class="frame"><!-- don't put fixed elements into the scroll container! -->
-    <h1 class="frame__title">Wedding Photo Album <br/> using Locomotive Scroll</h1>
+    <h1 class="frame__title">Wedding Album <br/> using Locomotive Scroll</h1>
     <div class="frame__links">
         <a href="#">Facebook</a>
         <a href="#">Instagram</a>
@@ -40,6 +40,12 @@
 <svg class="cursor" width="20" height="20" viewBox="0 0 20 20">
     <circle class="cursor__inner" cx="10" cy="10" r="5"/>
 </svg>
+<div id="fullscreenModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="linkImgID" src="#" alt="photo"/>
+    </div>
+</div>
 <script src="js/demo1/index.js"></script>
 </body>
 </html>

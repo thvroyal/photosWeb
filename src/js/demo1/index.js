@@ -21,13 +21,10 @@ async function getPhotos(url) {
     return await response.json();
 }
 
+
 function showPhotos() {
-    console.log("hello show");
     getPhotos(`https://api.imgur.com/3/album/lnyLIDE`)
         .then(data => {
-            document.getElementById('refreshScroll').setAttribute("style", "overflow: hidden");
-
-            console.log('data', data);
             const images = data.data.images;
             // print node image on HTML
             images ? images.map((image, index) => {
@@ -43,13 +40,13 @@ function showPhotos() {
                         <span>#green</span>
                         <span>#chair</span>
                     </p>
-                    <a class="gallery__item-link">explore</a>
+                    <a class="gallery__item-link detail-img" id="${image.link}">explore</a>
                 </figcaption>
             </figure>`;
                 gallery.insertAdjacentHTML('beforeend', element);
             }) : null
         })
-        .then(function() {
+        .then(function () {
             // Preload images and fonts
             Promise.all([preloadImages('.gallery__item-imginner'), preloadFonts('vxy2fer')]).then(() => {
                 // Remove loader (loading class)
@@ -65,7 +62,7 @@ function showPhotos() {
                 });
             });
         })
-        .then(function(){
+        .then(function () {
             // Initial Locomotive Scroll => refresh scrollbar after insert content in HTML
             const lscroll = new LocomotiveScroll({
                 el: document.querySelector('[data-scroll-container]'),
@@ -75,9 +72,33 @@ function showPhotos() {
         })
 }
 
-window.onload = function(){
+window.onload = function () {
     showPhotos();
 }
 
+window.addEventListener('click', event => {
+    if (event.target.classList[1] === 'detail-img') {
+        const linkImage = event.target.id;
 
+        let modal = document.getElementById("fullscreenModal");
+        let span = document.getElementsByClassName("close")[0];
+        let replaceImage = document.getElementById("linkImgID");
+
+        modal.style.display = "block";
+        replaceImage.setAttribute("src", linkImage);
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+
+})
 
