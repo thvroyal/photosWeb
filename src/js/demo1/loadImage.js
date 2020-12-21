@@ -1,6 +1,8 @@
 import 'regenerator-runtime/runtime'
+import LocomotiveScroll from 'locomotive-scroll';
 
 const gallery = document.getElementById("showGallery");
+
 
 function convertNumber(index) {
     let no = index + 1;
@@ -21,7 +23,7 @@ function showPhotos() {
     console.log("hello show");
     getPhotos(`https://api.imgur.com/3/album/lnyLIDE`)
         .then(data => {
-            document.getElementById('refreshScroll').setAttribute("style","overflow: hidden");
+            document.getElementById('refreshScroll').setAttribute("style", "overflow: hidden");
 
             console.log('data', data);
             const images = data.data.images;
@@ -44,16 +46,17 @@ function showPhotos() {
             </figure>`;
                 gallery.insertAdjacentHTML('beforeend', element);
             }) : null
-
         })
-        .then(function() {
-            // refresh scrollbar
-            setTimeout(function() {
-                document.getElementById('refreshScroll').setAttribute("style","overflow: auto");
-            },1)
+        .then(function(){
+            // Initial Locomotive Scroll => refresh scrollbar after insert content in HTML
+            const lscroll = new LocomotiveScroll({
+                el: document.querySelector('[data-scroll-container]'),
+                smooth: true,
+                direction: 'horizontal'
+            });
         })
 }
 
-window.onload = function () {
+window.onload = function(){
     showPhotos();
 }

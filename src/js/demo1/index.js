@@ -1,14 +1,5 @@
 import {preloadFonts, preloadImages} from '../utils';
 import Cursor from '../cursor';
-import LocomotiveScroll from 'locomotive-scroll';
-
-// Initialize Locomotive Scroll (horizontal direction)
-const lscroll = new LocomotiveScroll({
-    el: document.querySelector('[data-scroll-container]'),
-    smooth: true,
-    direction: 'horizontal'
-});
-
 
 // Preload images and fonts
 Promise.all([preloadImages('.gallery__item-imginner'), preloadFonts('vxy2fer')]).then(() => {
